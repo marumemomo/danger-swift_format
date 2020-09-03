@@ -2,3 +2,10 @@
 pkg
 .idea/
 .yardoc
+
+# swift-format
+.build
+swift-format.json
+
+# ruby
+vendor/bundle

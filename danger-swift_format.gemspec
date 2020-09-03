@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = SwiftFormat::VERSION
   spec.authors       = ['kaito watanabe']
   spec.email         = ['marumemomo@gmail.com']
-  spec.description   = %q{A short description of danger-swift_format.}
-  spec.summary       = %q{A longer description of danger-swift_format.}
-  spec.homepage      = 'https://github.com/kaito watanabe/danger-swift_format'
+  spec.description   = %q{danger plugin for swift-format.}
+  spec.summary       = %q{danger plugin for swift-format.}
+  spec.homepage      = 'https://github.com/marumemomo/danger-swift_format'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'danger-plugin-api', '~> 1.0'
 
   # General ruby development
-  spec.add_development_dependency 'bundler', '~> 1.3'
+  spec.add_development_dependency 'bundler', '~> 2.1'
   spec.add_development_dependency 'rake', '~> 10.0'
 
   # Testing support

@@ -1,33 +1,48 @@
 module Danger
-  # This is your plugin class. Any attributes or methods you expose here will
-  # be available from within your Dangerfile.
+  require "open3"
+
+  # Run swift-format.
+  # This is using https://github.com/apple/swift-format
   #
-  # To be published on the Danger plugins site, you will need to have
-  # the public interface documented. Danger uses [YARD](http://yardoc.org/)
-  # for generating documentation from your plugin source, and you can verify
-  # by running `danger plugins lint` or `bundle exec rake spec`.
+  # @example Run swift-format format
+  #          swift_format.binary_path = ".build/x86_64-apple-macosx/release/swift-format"
+  #          swift_format.configuration = "swift-format.json"
+  #          swift_format.format("Sources/*.swift", true)
   #
-  # You should replace these comments with a public description of your library.
+  # @see  marumemomo/danger-swift_format
+  # @tags swift-format
   #
-  # @example Ensure people are well warned about merging on Mondays
-  #
-  #          my_plugin.warn_on_mondays
-  #
-  # @see  kaito watanabe/danger-swift_format
-  # @tags monday, weekends, time, rattata
-  #
+
   class DangerSwiftFormat < Plugin
 
-    # An attribute that you can read/write from your Dangerfile
+    # swift-format configuration file path
     #
     # @return   [Array<String>]
-    attr_accessor :my_attribute
+    attr_accessor :configuration
 
-    # A method that you can call from your Dangerfile
+    # swift-format binary path
+    #
+    # @return   [Array<String>]
+    attr_accessor :binary_path
+
+    # run swift-format lint
     # @return   [Array<String>]
     #
-    def warn_on_mondays
-      warn 'Trying to merge code on a Monday' if Date.today.wday == 1
+    def lint(files)
+      o, e, s = Open3.capture3("#{binary_path} lint -r --configuration #{configuration} #{files}")
+      return if e == ''
+      markdown e
+    end
+
+    # run swift-format format
+    # @return   [Array<String>]
+    #
+    def format(files, in_place = false)
+      in_place_option = "-i"
+      in_place_option = '' if !in_place
+      o, e, s = Open3.capture3("#{binary_path} format -r #{in_place_option} --configuration #{configuration} #{files}")
+      return if e == ''
+      markdown e
     end
   end
 end
