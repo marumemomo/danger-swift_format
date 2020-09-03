@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    danger-swift_format (0.0.1)
+    danger-apple_swift_format (0.0.1)
       danger-plugin-api (~> 1.0)
 
 GEM
@@ -132,7 +132,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.1)
-  danger-swift_format!
+  danger-apple_swift_format!
   guard (~> 2.14)
   guard-rspec (~> 4.7)
   listen (= 3.0.7)

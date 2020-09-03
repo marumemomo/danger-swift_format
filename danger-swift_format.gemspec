@@ -4,12 +4,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'swift_format/gem_version.rb'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'danger-swift_format'
+  spec.name          = 'danger-apple_swift_format'
   spec.version       = SwiftFormat::VERSION
   spec.authors       = ['kaito watanabe']
   spec.email         = ['marumemomo@gmail.com']
-  spec.description   = %q{danger plugin for swift-format.}
-  spec.summary       = %q{danger plugin for swift-format.}
+  spec.description   = %q{danger plugin for apple/swift-format.}
+  spec.summary       = %q{danger plugin for apple/swift-format.}
   spec.homepage      = 'https://github.com/marumemomo/danger-swift_format'
   spec.license       = 'MIT'
 
