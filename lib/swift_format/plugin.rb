@@ -31,7 +31,7 @@ module Danger
     def lint(files)
       o, e, s = Open3.capture3("#{binary_path} lint -r --configuration #{configuration} #{files}")
       return if e == ''
-      markdown e
+      warn e
     end
 
     # run swift-format format
@@ -42,7 +42,7 @@ module Danger
       in_place_option = '' if !in_place
       o, e, s = Open3.capture3("#{binary_path} format -r #{in_place_option} --configuration #{configuration} #{files}")
       return if e == ''
-      markdown e
+      warn e
     end
   end
 end
