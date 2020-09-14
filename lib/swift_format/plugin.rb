@@ -29,7 +29,7 @@ module Danger
     # @return   [Array<String>]
     #
     def lint(files)
-      o, e, s = Open3.capture3("#{binary_path} lint -r --configuration #{configuration} #{files}")
+      o, e, s = Open3.capture3("#{binary_path} lint -r --configuration #{configuration} #{target_file(files)}")
       return if e == ''
       warn e
     end
@@ -40,9 +40,21 @@ module Danger
     def format(files, in_place = false)
       in_place_option = "-i"
       in_place_option = '' if !in_place
-      o, e, s = Open3.capture3("#{binary_path} format -r #{in_place_option} --configuration #{configuration} #{files}")
+      o, e, s = Open3.capture3("#{binary_path} format -r #{in_place_option} --configuration #{configuration} #{target_file(files)}")
       return if e == ''
       warn e
+    end
+
+    def target_file(files)
+      target_files = []
+      
+      if files.instance_of?(Array)
+        target_files = files
+      elsif files.instance_of?(String)
+        target_files = files.split(' ')
+      end
+
+      target_files.select { |f| f.include? '.swift' } .join(' ')
     end
   end
 end
