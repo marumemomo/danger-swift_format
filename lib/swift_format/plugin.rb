@@ -40,16 +40,14 @@ module Danger
     # run swift-format format
     # @return   [Array<String>]
     #
-    def format(files, in_place = false)
-      in_place_option = "-i"
-      in_place_option = '' if !in_place
-
+    def format(files)
       target = target_file(files)
       return if target.empty?
 
-      o, e, s = Open3.capture3("#{binary_path} format -r #{in_place_option} --configuration #{configuration} #{target}")
-      return if e == ''
-      warn e
+      `#{binary_path} format -r  -i --configuration #{configuration} #{target}`
+      o, e, s = Open3.capture3("git diff #{target}")
+      return if o == ''
+      warn o
     end
 
     def target_file(files)
