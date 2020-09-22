@@ -47,7 +47,7 @@ module Danger
       `#{binary_path} format -r  -i --configuration #{configuration} #{target}`
       o, e, s = Open3.capture3("git diff #{target}")
       return if o == ''
-      warn o
+      warn "```\n#{o}\n```"
     end
 
     def target_file(files)
